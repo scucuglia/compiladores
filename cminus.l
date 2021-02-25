@@ -59,19 +59,22 @@ while			  { return WHILE; }
 "("				  { return ABP; }
 ")"				  { return FCP;	}
 {ESPACO}+         { /* ignora espaco em branco */ }
-\n				  lineno++;
+\n				  { lineno++; }
 
-.                 { printf("[Erro - linha %d] Lexema não foi reconhecido: ", lineno);
+.                 {
+                    printf("[Erro - linha %d] Lexema não foi reconhecido: ", lineno);
                     ECHO;
                     BEGIN(erro);
                   }
 <erro>^[" "\n\t]  ECHO;
-<erro>\n		  { lineno++;
+<erro>\n		  {
+                    lineno++;
                     printf("\n");
                     BEGIN(INITIAL);
                     return ERROR;
                   }
-<erro>{ESPACO}    { printf("\n");
+<erro>{ESPACO}    {
+                    printf("\n");
                     BEGIN(INITIAL);
                     return ERROR;
                   }

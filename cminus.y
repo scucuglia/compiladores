@@ -38,8 +38,20 @@ TreeNode * parse(void) {
 
 %}
 
+/* ID, NUM */
+%token ID NUM
 
-%token ID NUM SOM SUB MUL DIV ATT PEV ABP FCP FIM ERR IF ELSE  INT  RETURN VOID  WHILE  COM  MENIG  MAIOR  MENOR  MAIIG   DIF  VIRG  ABCH  FECCH  ABCO FCCO IGLIGL ERROR
+/* Operadores */
+%token SOM SUB MUL DIV ATT MENIG MAIOR MENOR MAIIG DIF IGLIGL
+
+/* Pontuacao */
+%token PEV VIRG
+%token ABP FCP ABCH FECCH ABCO FCCO
+
+/* Palavras */
+%token IF ELSE INT RETURN VOID WHILE
+
+%token ERROR
 
 %% /* Gramatica do C- */
 
