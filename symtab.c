@@ -183,11 +183,10 @@ int check_not_exist(char *name, char *scope, IDType idType)
 		}
 		l = l->next;
 	}
+	if (l == NULL && lGlob == NULL) return 1;
 
-	if (l == NULL)
-		l = lGlob;
-	if (l == NULL)
-		return 1;
+	l = l == NULL ? lGlob : l;
+
 	if (l->idType == idType)
 	{
 		if (l->idType)
@@ -232,8 +231,8 @@ int search_main()
 void printSymTab(FILE *listing)
 {
 	int i;
-	fprintf(listing, "Variable Name      Scope       ID Type  Val Type  Line Numbers\n");
-	fprintf(listing, "-------------  --------------  -------  --------  ------------\n");
+	fprintf(listing, "Nome do identificador  Tipo           Escopo      \n");
+	fprintf(listing, "---------------------  -------------  ------------\n");
 	for (i = 0; i < SIZE; ++i)
 	{
 		if (hashTable[i] != NULL)
@@ -242,22 +241,20 @@ void printSymTab(FILE *listing)
 			while (l != NULL)
 			{
 				LineList t = l->lines;
-				fprintf(listing, "%-14s  ", l->name);
-				fprintf(listing, "%-14s   ", l->scope);
+				// Nome do identificador
+				fprintf(listing, "%-20s  ", l->name);
+
+				// Tipo
 				if (l->idType)
-					fprintf(listing, " %-7s ", "var");
+					fprintf(listing, " %-14s ", "var");
 				else
-					fprintf(listing, " %-7s ", "func");
-				if (l->valType)
-					fprintf(listing, " %-6s", "int");
-				else
-					fprintf(listing, " %-6s", "void");
-				while (t != NULL)
-				{
-					fprintf(listing, "%4d ", t->lineno);
-					t = t->next;
-				}
-				fprintf(listing, "\n");
+					fprintf(listing, " %-14s ", "func");
+
+				// Escopo
+				fprintf(listing, "%-14s   ", l->scope);
+
+				fprintf(listing, "\n\n");
+
 				l = l->next;
 			}
 		}

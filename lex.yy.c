@@ -2017,7 +2017,9 @@ TokenType getToken(void)
         lineno=1;
         yyin = source;
         yyout = listing;
+        fprintf(listing, "\n*****************************\n");
         fprintf(listing, "Tokens & lexemas:\n");
+		    fprintf(listing, "*****************************\n");
     }
     strncpy(tokenString,nextToken,MAXTOKENLEN);
     currentToken = yylex();

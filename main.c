@@ -64,7 +64,12 @@ main(int argc, char *argv[])
 		exit(1);
 	}
 	listing = stdout; /* send listing to screen */
-	fprintf(listing, "\nC - COMPILATION: %s\n", pgm);
+	fprintf(listing, "\n*****************************\n");
+	fprintf(listing, "*****************************\n");
+	fprintf(listing, ">> COMPILADOR C-\n");
+	fprintf(listing, ">>>>>> Arquivo: %s\n", pgm);
+	fprintf(listing, "*****************************\n");
+	fprintf(listing, "*****************************\n\n\n");
 #if NO_PARSE
 	while (getToken() != ENDFILE)
 		;
@@ -72,7 +77,9 @@ main(int argc, char *argv[])
 	syntaxTree = parse();
 	if (TraceParse)
 	{
-		fprintf(listing, "\nSyntax tree:\n");
+		fprintf(listing, "\n\n\n*****************************\n");
+		fprintf(listing, "Arvore Sintática:\n");
+		fprintf(listing, "*****************************\n");
 		printTree(syntaxTree);
 	}
 #if !NO_ANALYZE
