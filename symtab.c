@@ -1,13 +1,3 @@
-/****************************************************/
-/* File: symtab.c                                   */
-/* Symbol table implementation for the TINY compiler*/
-/* (allows only one symbol table)                   */
-/* Symbol table is implemented as a chained         */
-/* hash table                                       */
-/* Compiler Construction: Principles and Practice   */
-/* Kenneth C. Louden                                */
-/****************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,43 +24,9 @@ static int hash(char *key)
 	return temp;
 }
 
-/* the list of line numbers of the source
- * code in which a variable is referenced
- */
-typedef struct LineListRec
-{
-	int lineno;
-	struct LineListRec *next;
-} * LineList;
-
-/* The record in the bucket lists for
- * each variable, including name,
- * assigned memory location, and
- * the list of line numbers in which
- * it appears in the source code
- */
-
-//typedef enum {Fun,Var} IDType;
-//typedef enum {Integer, Void} ExpType;
-
-typedef struct BucketListRec
-{
-	char *name;
-	LineList lines;
-	char *scope;
-	IDType idType;
-	ExpType valType;
-	struct BucketListRec *next;
-} * BucketList;
-
 /* the hash table */
 static BucketList hashTable[SIZE];
 
-/* Procedure st_insert inserts line numbers and
- * memory locations into the symbol table
- * loc = memory location is inserted only the
- * first time, otherwise ignored
- */
 void st_insert(char *name, int lineno, char *scope, IDType idType, ExpType valType)
 {
 	int h = hash(name);
@@ -116,119 +72,17 @@ void st_insert(char *name, int lineno, char *scope, IDType idType, ExpType valTy
 	}
 } /* st_insert */
 
-int validate_decl(char *name, int lineno, char *scope, IDType idType, ExpType valType)
-{
+BucketList get_bucket(char *name) {
 	int h = hash(name);
 	BucketList l = hashTable[h];
-	BucketList lGlob = NULL;
-	while (l != NULL)
-	{
-		if (strcmp(name, l->name) == 0)
-		{
-			if (strcmp(l->scope, "Global") == 0)
-				lGlob = l;
-			if (strcmp(scope, l->scope) == 0)
-				break;
-		}
-		l = l->next;
-	}
-
-	if (l == NULL)
-		l = lGlob;
-	if (l == NULL) /* variable not yet in table */
-	{
-		if (idType)
-			printf("Erro Semantico: uso de variavel nao declarada : %s. Linha: %d\n", name, lineno);
-		else
-			printf("Erro Semantico: chamada de funcao nao declarada: %s. Linha: %d\n", name, lineno);
-		return -1;
-	}
-	else /* found in table, so just add line number */
-	{	 //Check scope and type
-		// if((strcmp("Global",l->scope)!=0)&&(strcmp(scope,l->scope)!=0)){
-		//   if(idType)
-		//     printf("Erro Semantico: uso da variavel %s nao declarada no escopo %s, Linha: %d\n",name,scope,lineno);
-		//   else
-		//     printf("Erro Semantico: chamada da funcao %s nao declarada no escopo %s, Linha: %d\n",name,scope,lineno);
-		//   return -1;
-		// }
-		if (idType != l->idType)
-		{
-			if (idType)
-				printf("Erro Semantico: funcao %s eh usada como variavel, Linha: %d\n", name, lineno);
-			else
-				printf("Erro Semantico: variavel %s eh usada como funcao, Linha: %d\n", name, lineno);
-			return -1;
-		}
-	}
-	return 1;
-}
-
-/* Function st_lookup returns the memory
- * location of a variable or -1 if not found
- */
-int check_not_exist(char *name, char *scope, IDType idType)
-{
-	int h = hash(name);
-	BucketList l = hashTable[h];
-	BucketList lGlob = NULL;
-	while (l != NULL)
-	{
-		if (strcmp(name, l->name) == 0)
-		{
-			if (strcmp(l->scope, "Global") == 0)
-				lGlob = l;
-			if (strcmp(scope, l->scope) == 0)
-				break;
-		}
-		l = l->next;
-	}
-	if (l == NULL && lGlob == NULL) return 1;
-
-	l = l == NULL ? lGlob : l;
-
-	if (l->idType == idType)
-	{
-		if (l->idType)
-		{
-			if (strcmp(scope, l->scope) == 0)
-				printf("Erro Semantico: variavel %s ja havia sido declarada neste escopo (%s). Erro na Linha: %d\n", name, scope, lineno);
-		}
-		else
-			printf("Erro Semantico: funcao %s ja havia sido declarada. Erro na Linha: %d\n", name, lineno);
-	}
-	else
-	{
-		if (idType)
-			printf("Erro Semantico: declaracao invalida. %s ja havia sido declarada como funcao. Erro na Linha: %d\n", name, lineno);
-		else if (strcmp(l->scope, "Global") == 0)
-			printf("Erro Semantico: declaracao invalida. %s ja havia sido declarada como variavel. Erro na Linha: %d\n", name, lineno);
-	}
-
-	//Checar escopo
-	return -1;
-}
-
-int search_main()
-{
-	int h = hash("main");
-	BucketList l = hashTable[h];
-	while ((l != NULL) && (strcmp("main", l->name) != 0))
-		l = l->next;
-	if (l == NULL)
-	{
-		printf("\nErro Semantico: funcao main nao declarada.\n");
-		return -1;
-	}
-	else
-		return 1;
+	return l;
 }
 
 /* Procedure printSymTab prints a formatted
  * listing of the symbol table contents
  * to the listing file
  */
-void printSymTab(FILE *listing)
+void print_tab_simb(FILE *listing)
 {
 	int i;
 	fprintf(listing, "Nome do identificador  Tipo           Escopo      \n");
@@ -260,4 +114,4 @@ void printSymTab(FILE *listing)
 		}
 	}
 	fprintf(listing, "\n");
-} /* printSymTab */
+}

@@ -1,23 +1,14 @@
-/****************************************************/
-/* File: analyze.h                                  */
-/* Semantic analyzer interface for TINY compiler    */
-/* Compiler Construction: Principles and Practice   */
-/* Kenneth C. Louden                                */
-/****************************************************/
-
 #ifndef _ANALYZE_H_
 #define _ANALYZE_H_
 
-/* Function buildSymtab constructs the symbol 
- * table by preorder traversal of the syntax tree
- */
-void buildSymtab(TreeNode *);
+#include "symtab.h"
+
+int validate_decl(char * name, int lineno, char * scope, IDType idType, ExpType valType);
+
+int check_not_exist (char * name, char *scope, IDType idType);
 
 int validate_main();
 
-/* Procedure typeCheck performs type checking 
- * by a postorder syntax tree traversal
- */
-void typeCheck(TreeNode *);
+void build_tab_simb();
 
 #endif

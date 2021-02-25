@@ -27,20 +27,22 @@ O analisador léxico está definido no arquivo `cminus.l` e deve ser rodado util
 
 Precisamos:
 
-[ ] mudar a ordem das coisas e talvez alguns nomes, sempre lembrando de refletir nos outros arquivos
+[ x ] melhorar formatacao
+
+[ x ] mudar a ordem das coisas e talvez alguns nomes, sempre lembrando de refletir nos outros arquivos
 
 ---
 
 ### Analisador Sintático - Parser
-O analisador sintático está definido no arquivo `cminus.y` e deve ser rodado utilizando o `bison` 
+O analisador sintático está definido no arquivo `cminus.y` e deve ser rodado utilizando o `bison`
 
 Precisamos:
 
-[ ] melhorar o formato dos prints
+[ x ] melhorar o formato dos prints
 
-[ ] remover o codigo comentado
+[ x ] remover o codigo comentado
 
-[ ] estruturar conteudo de dentro das declarações (se der)
+[ x ] estruturar conteudo de dentro das declarações (se der)
 
 ****ATENÇÃO! Não mexer na ordem das declarações!!**
 
@@ -48,19 +50,19 @@ Precisamos:
 
 ### Gerenciador de tabelas de símbolos
 
-Se não me engano tá no `symtab.c`, mas não tenho certeza. Sei que tem uma função `void printSymTab` lá que printa a tabela de simbolos. 
+Se não me engano tá no `symtab.c`, mas não tenho certeza. Sei que tem uma função `void printSymTab` lá que printa a tabela de simbolos.
 
 ---
 
 ### Analisador Semântico
 
-O analisador semântico está no arquivo `analyze.c`. 
+O analisador semântico está no arquivo `analyze.c`.
 
 Precisamos:
 
-[ ] verificar se os codigos comentados influenciam no trabalho
+[ x ] verificar se os codigos comentados influenciam no trabalho
 
-[ ] 
+[ ]
 
 ---
 
@@ -71,9 +73,9 @@ A arvore sintatica parece estar no arquivo `symtab.c`.
 
 Precisamos:
 
-[ ] verificar se a arvore sintatica que esta sendo printada está correta
+[ x ] verificar se a arvore sintatica que esta sendo printada está correta
 
-[ ] 
+[ ]
 
 ---
 
@@ -84,3 +86,7 @@ Provavelmente, isso estava no arquivo `cgen.c` do `loucomp.rar` da professora.
 Precisamos:
 
 [ ] descobrir como gerar esse codigo intermediario
+
+
+### TODO:
+Remover comentarios de `error` do `cminus.y`

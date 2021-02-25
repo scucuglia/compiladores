@@ -2025,10 +2025,10 @@ TokenType getToken(void)
     currentToken = yylex();
     strncpy(nextToken,yytext,MAXTOKENLEN);
 
-    if (TraceScan) {
-        fprintf(listing, "  linha %d: ", lineno);
-        printToken(currentToken, nextToken);
-    }
+
+    fprintf(listing, "  linha %d: ", lineno);
+    printToken(currentToken, nextToken);
+
     return currentToken;
 }
 
