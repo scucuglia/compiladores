@@ -93,7 +93,7 @@ void printToken(TokenType token, const char *tokenString)
 		fprintf(listing, "ID = %s\n", tokenString);
 		break;
 	case ERROR:
-		fprintf(listing, "ERROR: %s\n", tokenString);
+		fprintf(listing, "%s (erro)\n", tokenString);
 		break;
 	}
 }

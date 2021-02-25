@@ -62,9 +62,11 @@ while			  { return WHILE; }
 \n				  { lineno++; }
 
 .                 {
-                    printf("[Erro - linha %d] Lexema não foi reconhecido: ", lineno);
+                    printf("ERRO LÉXICO: ");
                     ECHO;
+                    printf("  LINHA %d\n", lineno);
                     BEGIN(erro);
+                    return ERROR;
                   }
 <erro>^[" "\n\t]  ECHO;
 <erro>\n		  {

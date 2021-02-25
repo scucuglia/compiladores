@@ -956,21 +956,23 @@ case 34:
 YY_RULE_SETUP
 #line 64 "cminus.l"
 {
-                    printf("[Erro - linha %d] Lexema não foi reconhecido: ", lineno);
+                    printf("ERRO LÉXICO: ");
                     ECHO;
+                    printf("  LINHA %d\n", lineno);
                     BEGIN(erro);
+                    return ERROR;
                   }
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 69 "cminus.l"
+#line 71 "cminus.l"
 ECHO;
 	YY_BREAK
 case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
-#line 70 "cminus.l"
+#line 72 "cminus.l"
 {
                     lineno++;
                     printf("\n");
@@ -980,7 +982,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 76 "cminus.l"
+#line 78 "cminus.l"
 {
                     printf("\n");
                     BEGIN(INITIAL);
@@ -989,10 +991,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 81 "cminus.l"
+#line 83 "cminus.l"
 ECHO;
 	YY_BREAK
-#line 996 "lex.yy.c"
+#line 998 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(comentario):
 case YY_STATE_EOF(erro):
@@ -2002,7 +2004,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 81 "cminus.l"
+#line 83 "cminus.l"
 
 
 
