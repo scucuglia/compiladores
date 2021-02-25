@@ -221,7 +221,7 @@ void printTree(TreeNode *tree)
 				fprintf(listing, "Assign\n");
 				break;
 			case IfElseK:
-				fprintf(listing, "If else\n");
+				fprintf(listing, "If-Else\n");
 				break;
 			case RetK:
 				fprintf(listing, "Return\n");
@@ -265,9 +265,9 @@ void printTree(TreeNode *tree)
 			{
 			case FunK:
 				if (tree->type)
-					fprintf(listing, "Function Declaration: %s, type: Integer\n ", tree->attr.name);
+					fprintf(listing, "Function Declaration: %s, type: Integer\n", tree->attr.name);
 				else
-					fprintf(listing, "Function Declaration: %s, type: Void\n ", tree->attr.name);
+					fprintf(listing, "Function Declaration: %s, type: Void\n", tree->attr.name);
 				break;
 			case VarK:
 				fprintf(listing, "Variable Declaration: %s\n", tree->attr.name);
