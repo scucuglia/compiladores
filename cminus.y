@@ -213,8 +213,6 @@ local_declaracoes  : local_declaracoes var_declaracao
 		}
 	    | vazio
 		{ $$.tree=NULL; }
-		/* | error { $$.tree = NULL; } */
-		//scope end?
 		;
 
 statement_lista  : statement_lista statement
@@ -245,7 +243,6 @@ statement		: expressao_decl
 		{ $$.tree=$1.tree; }
 		| retorno_decl
 		{ $$.tree=$1.tree; }
-	//| error {  $$.tree = NULL;  }
 		;
 
 expressao_decl    : expressao PEV
@@ -439,23 +436,10 @@ vazio		:{ $$.tree=NULL; };
 
 int yyerror(char * message)
 {
-	if(yychar!=ERROR){
-		printf("Erro de sintaxe na linha %d. ",lineno);
-	  	printf("Token nao esperado: ");
+	if(yychar != ERROR){
+		printf("ERRO DE SINTAXE na LINHA %d. Token: ",lineno);
 	  	printToken(yychar,nextToken);
 	}
-  Error = 1;
-  return 0;
+  	Error = 1;
+  	return 0;
 }
-
-/* yylex calls getToken to make Yacc/Bison output
- * compatible with ealier versions of the TINY scanner
- */
-/*int main()
-{
-  yyparse();
-  return 1;
-}*/
-
-
-
