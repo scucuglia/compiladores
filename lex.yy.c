@@ -2015,18 +2015,15 @@ TokenType getToken(void)
         lineno=1;
         yyin = source;
         yyout = listing;
-        currentToken=yylex();
-        strncpy(nextToken,yytext,MAXTOKENLEN);
-        strncpy(tokenString,nextToken,MAXTOKENLEN);
-    } else {
-        strncpy(tokenString,nextToken,MAXTOKENLEN);
-        currentToken = yylex();
-        strncpy(nextToken,yytext,MAXTOKENLEN);
+        fprintf(listing, "Tokens & lexemas:\n");
     }
+    strncpy(tokenString,nextToken,MAXTOKENLEN);
+    currentToken = yylex();
+    strncpy(nextToken,yytext,MAXTOKENLEN);
 
     if (TraceScan) {
-        fprintf(listing, "\t%d: ", lineno);
-        printToken(currentToken,tokenString);
+        fprintf(listing, "  linha %d: ", lineno);
+        printToken(currentToken, nextToken);
     }
     return currentToken;
 }
