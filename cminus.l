@@ -1,12 +1,10 @@
 %{
 #include "globals.h"
 #include "util.h"
-// #include "scan.h"
+
 /* lexeme of identifier or reserved word */
 char tokenString[MAXTOKENLEN+1];
 char nextToken[MAXTOKENLEN+1];
-
-FILE *f_out;
 
 
 %}
@@ -55,7 +53,7 @@ while			  { return WHILE; }
 "}"				  { return FECCH; }
 "["				  { return ABCO; }
 "]"				  { return FCCO; }
-;				  { return PEV; }
+;				    { return PEV; }
 "("				  { return ABP; }
 ")"				  { return FCP;	}
 {ESPACO}+         { /* ignora espaco em branco */ }

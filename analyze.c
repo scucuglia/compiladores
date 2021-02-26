@@ -2,7 +2,6 @@
 #include "symtab.h"
 #include "analyze.h"
 
-/* counter for variable memory locations */
 static int location = 0;
 
 // Confirma que foi declarada e valida os tipos

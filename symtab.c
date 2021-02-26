@@ -85,8 +85,8 @@ BucketList get_bucket(char *name) {
 void print_tab_simb(FILE *listing)
 {
 	int i;
-	fprintf(listing, "Nome do identificador  Tipo           Escopo      \n");
-	fprintf(listing, "---------------------  -------------  ------------\n");
+	printf("Nome do identificador  Tipo           Escopo      \n");
+	printf("---------------------  -------------  ------------\n");
 	for (i = 0; i < SIZE; ++i)
 	{
 		if (hashTable[i] != NULL)
@@ -96,22 +96,22 @@ void print_tab_simb(FILE *listing)
 			{
 				LineList t = l->lines;
 				// Nome do identificador
-				fprintf(listing, "%-20s  ", l->name);
+				printf("%-20s  ", l->name);
 
 				// Tipo
 				if (l->idType)
-					fprintf(listing, " %-14s ", "var");
+					printf(" %-14s ", "var");
 				else
-					fprintf(listing, " %-14s ", "func");
+					printf(" %-14s ", "func");
 
 				// Escopo
-				fprintf(listing, "%-14s   ", l->scope);
+				printf("%-14s   ", l->scope);
 
-				fprintf(listing, "\n\n");
+				printf("\n\n");
 
 				l = l->next;
 			}
 		}
 	}
-	fprintf(listing, "\n");
+	printf("\n");
 }

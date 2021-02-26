@@ -9,91 +9,91 @@ void printToken(TokenType token, const char *tokenString)
 	switch (token)
 	{
 	case ATT:
-		fprintf(listing, "=\n");
+		printf("Token: ATT, Lexema: =\n");
 		break;
 	case ABCH:
-		fprintf(listing, "{\n");
+		printf("Token: ABCH, Lexema: {\n");
 		break;
 	case FECCH:
-		fprintf(listing, "}\n");
+		printf("Token: FECCH, Lexema: }\n");
 		break;
 	case ABCO:
-		fprintf(listing, "[\n");
+		printf("Token: ABCO, Lexema: [\n");
 		break;
 	case FCCO:
-		fprintf(listing, "]\n");
+		printf("Token: FCCO, Lexema: ]\n");
 		break;
 	case ABP:
-		fprintf(listing, "(\n");
+		printf("Token: ABP, Lexema: (\n");
 		break;
 	case FCP:
-		fprintf(listing, ")\n");
+		printf("Token: FCP, Lexema: )\n");
 		break;
 	case VIRG:
-		fprintf(listing, ",\n");
+		printf("Token: VIRG, Lexema: ,\n");
 		break;
 	case PEV:
-		fprintf(listing, ";\n");
+		printf("Token: PEV, Lexema: ;\n");
 		break;
 	case DIF:
-		fprintf(listing, "!=\n");
+		printf("Token: DIF, Lexema: !=\n");
 		break;
 	case MAIOR:
-		fprintf(listing, ">\n");
+		printf("Token: MAIOR, Lexema: >\n");
 		break;
 	case MAIIG:
-		fprintf(listing, ">=\n");
+		printf("Token: MAIIG, Lexema: >=\n");
 		break;
 	case MENOR:
-		fprintf(listing, "<\n");
+		printf("Token: MENOR, Lexema: <\n");
 		break;
 	case MENIG:
-		fprintf(listing, "<=\n");
+		printf("Token: MENIG, Lexema: <=\n");
 		break;
 	case IGLIGL:
-		fprintf(listing, "==\n");
+		printf("Token: IGLIGL, Lexema: ==\n");
 		break;
 	case SOM:
-		fprintf(listing, "+\n");
+		printf("Token: SOM, Lexema: +\n");
 		break;
 	case SUB:
-		fprintf(listing, "-\n");
+		printf("Token: SUB, Lexema: -\n");
 		break;
 	case MUL:
-		fprintf(listing, "*\n");
+		printf("Token: MUL, Lexema: *\n");
 		break;
 	case DIV:
-		fprintf(listing, "/\n");
+		printf("Token: DIV, Lexema: /\n");
 		break;
 	case IF:
-		fprintf(listing, "if\n");
+		printf("Token: IF, Lexema: if\n");
 		break;
 	case ELSE:
-		fprintf(listing, "else\n");
+		printf("Token: ELSE, Lexema: else\n");
 		break;
 	case INT:
-		fprintf(listing, "int\n");
+		printf("Token: INT, Lexema: int\n");
 		break;
 	case RETURN:
-		fprintf(listing, "return\n");
+		printf("Token: RETURN, Lexema: return\n");
 		break;
 	case VOID:
-		fprintf(listing, "void\n");
+		printf("Token: VOID, Lexema: void\n");
 		break;
 	case WHILE:
-		fprintf(listing, "while\n");
-		break;
-	case 0:
-		fprintf(listing, "EOF\n");
+		printf("Token: WHILE, Lexema: while\n");
 		break;
 	case NUM:
-		fprintf(listing, "NUM = %s\n", tokenString);
+		printf("Token: NUM, Lexema: %s\n", tokenString);
 		break;
 	case ID:
-		fprintf(listing, "ID = %s\n", tokenString);
+		printf("Token: ID, Lexema: %s\n", tokenString);
+		break;
+	case 0:
+		printf("Token: 0, Lexema: EOF\n");
 		break;
 	case ERROR:
-		fprintf(listing, "%s (erro)\n", tokenString);
+		printf("%s (erro)\n", tokenString);
 		break;
 	}
 }
@@ -106,7 +106,7 @@ TreeNode *newDeclNode(DeclKind kind)
 	TreeNode *t = (TreeNode *)malloc(sizeof(TreeNode));
 	int i;
 	if (t == NULL)
-		fprintf(listing, "Out of memory error at line %d\n", lineno);
+		printf("Out of memory error at line %d\n", lineno);
 	else
 	{
 		for (i = 0; i < MAXCHILDREN; i++)
@@ -127,7 +127,7 @@ TreeNode *newStmtNode(StmtKind kind)
 	TreeNode *t = (TreeNode *)malloc(sizeof(TreeNode));
 	int i;
 	if (t == NULL)
-		fprintf(listing, "Out of memory error at line %d\n", lineno);
+		printf("Out of memory error at line %d\n", lineno);
 	else
 	{
 		for (i = 0; i < MAXCHILDREN; i++)
@@ -148,7 +148,7 @@ TreeNode *newExpNode(ExpKind kind)
 	TreeNode *t = (TreeNode *)malloc(sizeof(TreeNode));
 	int i;
 	if (t == NULL)
-		fprintf(listing, "Out of memory error at line %d\n", lineno);
+		printf("Out of memory error at line %d\n", lineno);
 	else
 	{
 		for (i = 0; i < MAXCHILDREN; i++)
@@ -174,7 +174,7 @@ char *copyString(char *s)
 	n = strlen(s) + 1;
 	t = malloc(n);
 	if (t == NULL)
-		fprintf(listing, "Out of memory error at line %d\n", lineno);
+		printf("Out of memory error at line %d\n", lineno);
 	else
 		strcpy(t, s);
 	return t;
@@ -216,28 +216,28 @@ void printTree(TreeNode *tree)
 			switch (tree->kind.stmt)
 			{
 			case IfK:
-				fprintf(listing, "If\n");
+				printf("If\n");
 				break;
 			case IterK:
-				fprintf(listing, "While\n");
+				printf("While\n");
 				break;
 			case AssignK:
-				fprintf(listing, "Assign\n");
+				printf("Assign\n");
 				break;
 			case IfElseK:
-				fprintf(listing, "If-Else\n");
+				printf("If-Else\n");
 				break;
 			case RetK:
-				fprintf(listing, "Return\n");
+				printf("Return\n");
 				break;
 			case AtivK:
-				fprintf(listing, "Chamada Funcao: %s\n", tree->attr.name);
+				printf("Chamada Funcao: %s\n", tree->attr.name);
 				break;
 			case CompostK:
-				fprintf(listing, "Sequencia de Statements\n");
+				printf("Sequencia de Statements\n");
 				break;
 			default:
-				fprintf(listing, "Unknown StmtNode kind\n");
+				printf("Unknown StmtNode kind\n");
 				break;
 			}
 		}
@@ -246,20 +246,20 @@ void printTree(TreeNode *tree)
 			switch (tree->kind.exp)
 			{
 			case OpK:
-				fprintf(listing, "Op: ");
+				printf("Op: ");
 				printToken(tree->attr.op, "\0");
 				break;
 			case ConstK:
-				fprintf(listing, "Const: %s\n", tree->attr.name);
+				printf("Const: %s\n", tree->attr.name);
 				break;
 			case IdK:
-				fprintf(listing, "Id: %s\n", tree->attr.name);
+				printf("Id: %s\n", tree->attr.name);
 				break;
 			case ArrayK:
-				fprintf(listing, "Array: %s\n", tree->attr.name);
+				printf("Array: %s\n", tree->attr.name);
 				break;
 			default:
-				fprintf(listing, "Unknown ExpNode kind\n");
+				printf("Unknown ExpNode kind\n");
 				break;
 			}
 		}
@@ -269,29 +269,29 @@ void printTree(TreeNode *tree)
 			{
 			case FunK:
 				if (tree->type)
-					fprintf(listing, "Function Declaration: %s, type: Integer\n", tree->attr.name);
+					printf("Function Declaration: %s, type: Integer\n", tree->attr.name);
 				else
-					fprintf(listing, "Function Declaration: %s, type: Void\n", tree->attr.name);
+					printf("Function Declaration: %s, type: Void\n", tree->attr.name);
 				break;
 			case VarK:
-				fprintf(listing, "Variable Declaration: %s\n", tree->attr.name);
+				printf("Variable Declaration: %s\n", tree->attr.name);
 				break;
 			case VarArrayK:
-				fprintf(listing, "Var Array Declaration: %s\n", tree->attr.name);
+				printf("Var Array Declaration: %s\n", tree->attr.name);
 				break;
 			case ParamK:
-				fprintf(listing, "Parameter Declaration: %s\n", tree->attr.name);
+				printf("Parameter Declaration: %s\n", tree->attr.name);
 				break;
 			case ParamArrayK:
-				fprintf(listing, "Parameter Array Declaration: %s\n", tree->attr.name);
+				printf("Parameter Array Declaration: %s\n", tree->attr.name);
 				break;
 			default:
-				fprintf(listing, "Unknown DeclNode kind\n");
+				printf("Unknown DeclNode kind\n");
 				break;
 			}
 		}
 		else
-			fprintf(listing, "Unknown node kind\n");
+			printf("Unknown node kind\n");
 		for (i = 0; i < MAXCHILDREN; i++)
 			printTree(tree->child[i]);
 		tree = tree->sibling;
