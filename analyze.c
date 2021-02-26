@@ -4,25 +4,30 @@
 
 static int location = 0;
 
-// Confirma que foi declarada e valida os tipos
-int validate_decl(char *name, int lineno, char *scope, IDType idType, ExpType valType)
-{
+BucketList get_bucket_list(char *name, char *scope) {
 	BucketList l = get_bucket(name);
-	BucketList lGlob = NULL;
+	BucketList l_global = NULL;
 	while (l != NULL)
 	{
 		if (strcmp(name, l->name) == 0)
 		{
 			if (strcmp(l->scope, "Global") == 0)
-				lGlob = l;
+				l_global = l;
 			if (strcmp(scope, l->scope) == 0)
 				break;
 		}
 		l = l->next;
 	}
+	if (l != NULL) return l;
+	return l_global;
+}
 
-	if (l == NULL)
-		l = lGlob;
+// Confirma que foi declarada e valida os tipos
+int validate_decl(char *name, int lineno, char *scope, IDType idType, ExpType valType)
+{
+	// procura na hashtable onde esta a variavel
+	BucketList l = get_bucket_list(name, scope);
+
 	if (l == NULL)
 	{
 		if (idType)
@@ -46,22 +51,9 @@ int validate_decl(char *name, int lineno, char *scope, IDType idType, ExpType va
 
 int check_not_exist(char *name, char *scope, IDType idType)
 {
-	BucketList l = get_bucket(name);
-	BucketList lGlob = NULL;
-	while (l != NULL)
-	{
-		if (strcmp(name, l->name) == 0)
-		{
-			if (strcmp(l->scope, "Global") == 0)
-				lGlob = l;
-			if (strcmp(scope, l->scope) == 0)
-				break;
-		}
-		l = l->next;
-	}
-	if (l == NULL && lGlob == NULL) return 1;
+	BucketList l = get_bucket_list(name, scope);
 
-	l = l == NULL ? lGlob : l;
+	if (l == NULL) return 1;
 
 	if (l->idType == idType)
 	{
