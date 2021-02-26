@@ -193,8 +193,12 @@ static int indentno = 0;
 static void printSpaces(void)
 {
 	int i;
-	for (i = 0; i < indentno; i++)
-		fprintf(listing, " ");
+	for (i = 0; i < indentno; i++) {
+		if (i % 4 == 0) {
+			printf("|");
+		}
+		printf(" ");
+	}
 }
 
 /* procedure printTree prints a syntax tree to the

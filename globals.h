@@ -79,4 +79,23 @@ typedef struct treeNode
 
 /* Error = TRUE prevents further passes if an error occurs */
 extern int Error;
+
+/* MAXTOKENLEN is the maximum size of a token */
+#define MAXTOKENLEN 40
+
+/* tokenString array stores the lexeme of each token */
+extern char tokenString[MAXTOKENLEN+1];
+extern char nextToken[MAXTOKENLEN+1];
+
+/* function getToken returns the
+ * next token in source file
+ */
+TokenType getToken(void);
+
+
+/* Function parse returns the newly
+ * constructed syntax tree
+ */
+TreeNode * parse(void);
+
 #endif

@@ -1,17 +1,4 @@
 #include "globals.h"
-
-/* set NO_PARSE to TRUE to get a scanner-only compiler */
-#define NO_PARSE FALSE
-/* set NO_ANALYZE to TRUE to get a parser-only compiler */
-#define NO_ANALYZE FALSE
-
-/* set NO_CODE to TRUE to get a compiler that does not
- * generate code
- */
-#define NO_CODE TRUE
-
-// #include "cminus.tab.h"
-#include "parse.h"
 #include "util.h"
 #include "analyze.h"
 
@@ -23,7 +10,7 @@ FILE *code;
 
 int Error = FALSE;
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	TreeNode *syntaxTree;
 	char pgm[120]; /* source code file name */

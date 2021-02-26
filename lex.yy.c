@@ -487,7 +487,7 @@ char *yytext;
 #line 2 "cminus.l"
 #include "globals.h"
 #include "util.h"
-#include "scan.h"
+// #include "scan.h"
 /* lexeme of identifier or reserved word */
 char tokenString[MAXTOKENLEN+1];
 char nextToken[MAXTOKENLEN+1];
